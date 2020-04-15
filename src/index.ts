@@ -62,6 +62,10 @@ const main = async () => {
     })
   );
 
+  redis.on('error', function (error) {
+    console.dir(error)
+  })
+
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen( {port: process.env.PORT || 4000 }, () => {
