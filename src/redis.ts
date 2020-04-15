@@ -1,8 +1,8 @@
-import * as Redis from 'ioredis';
+import Redis from 'ioredis';
 
 export const redis = new Redis(process.env.REDIS_URL);
 
-redis.on("error", (error) => {
+redis.on("error", (error: any) => {
   console.log("Redis connection error", error);
   process.exit(1);
 });
