@@ -43,7 +43,7 @@ const main = async () => {
   app.use(
     cors({
       credentials: true,
-      origin: "https://developerquiz.herokuapp.com/",
+      origin: "https://developerquiz.herokuapp.com",
     })
   );
 
