@@ -21,7 +21,7 @@ export class ForgotPasswordResolver {
     await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24);
 
     await sendEmail(email, 
-      `http://localhost:3000/user/change-password/${token}`
+      `https://developerquiz.herokuapp.com/user/change-password/${token}`
     );
 
     return true;
