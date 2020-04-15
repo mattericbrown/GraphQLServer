@@ -2,12 +2,13 @@ import nodemailer from "nodemailer";
 
 export async function sendEmail(email: string, url: string) {
 
+
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'SendGrid',
     auth: {
-      user: "developers.quiz.app@gmail.com", // generated ethereal user
-      pass: 'moosemaloose', // generated ethereal password
-    },
+      user: 'moosemalooks1',
+      pass: 'Matpod657!'
+    }
   });
 
   const mailOptions = {
