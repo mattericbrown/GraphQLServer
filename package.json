@@ -42,7 +42,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "ts-node  src/index.ts --unhandled-rejections=strict",
+    "start": "ts-node  src/index.ts",
     "db:setup": "ts-node ./src/test-utils/setup.ts",
     "test": "npm run db:setup && jest"
   }
