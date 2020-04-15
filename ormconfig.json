@@ -3,9 +3,9 @@
   "type": "postgres",
   "host": "ec2-34-234-228-127.compute-1.amazonaws.com",
   "port": 5432,
-  "username": "admin",
-  "password": "postgres",
-  "database": "graphql",
+  "username": "malooks",
+  "password": "moosey",
+  "database": "moose",
   "synchronize": true,
   "logging": true,
   "entities": [
