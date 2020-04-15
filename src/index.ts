@@ -64,7 +64,7 @@ const main = async () => {
     })
   );
 
-  redis.on("error", (error) => {
+  redis.on("error", (error: any) => {
     console.log("Redis connection error", error);
     process.exit(1);
   });
