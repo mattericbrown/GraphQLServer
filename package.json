@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@types/connect-redis": "^0.0.13",
+    "@types/express-session": "^1.17.0",
     "apollo-server-express": "^2.12.0",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.11.1",
@@ -26,9 +28,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/connect-redis": "^0.0.13",
     "@types/cors": "^2.8.6",
-    "@types/express-session": "^1.17.0",
     "@types/faker": "^4.1.11",
     "@types/graphql": "^14.5.0",
     "@types/ioredis": "^4.14.9",
