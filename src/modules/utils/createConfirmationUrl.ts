@@ -6,5 +6,5 @@ export const createConfirmationUrl = async (userId: number) => {
   const token = v4();
   await redis.set(confirmUserPrefix + token, userId, "ex", 60*60*24);
 
-  return `https://developerquiz.herokuapp.com/user/confirm/${token}`;
+  return `http://www.developersquiz.com/user/confirm/${token}`;
 }

@@ -45,7 +45,7 @@ const main = async () => {
   app.use(
     cors({
       credentials: true,
-      origin: "https://developerquiz.herokuapp.com",
+      origin: "http://www.developersquiz.com",
     })
   );
 
@@ -55,14 +55,14 @@ const main = async () => {
         client: redis as any
       }),
       name: "qid",
-      secret: "xbalfwkerf21493",
+      secret: ["xbalfwkerf21493", "mbalfwievj94637", "kelwklwopj63427"],
       resave: false,
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 365,
-        sameSite: true // 7 years
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+        sameSite: true 
       },
     })
   );
