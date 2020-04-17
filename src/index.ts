@@ -19,6 +19,7 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema,
     introspection: true,
+    playground: true,
     context: ({req, res}: any) => ({ req, res }),
     validationRules: [
       // queryComplexity({
