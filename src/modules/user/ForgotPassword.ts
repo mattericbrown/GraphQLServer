@@ -21,7 +21,7 @@ export class ForgotPasswordResolver {
     await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24);
 
     await sendEmail(email, 
-      `https://www.developersquiz.com/user/change-password/${token}`
+      `http://www.developersquiz.com/user/change-password/${token}`
     );
 
     return true;

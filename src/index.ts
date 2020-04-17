@@ -45,7 +45,7 @@ const main = async () => {
   app.use(
     cors({
       credentials: true,
-      origin: "https://www.developersquiz.com",
+      origin: "http://www.developersquiz.com",
     })
   );
 
