@@ -60,11 +60,13 @@ const main = async () => {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         maxAge: 1000 * 60 * 60 * 24  * 365
       },
     })
   );
+
+  app.set("trust proxy", 1);
 
   redis.on("error", (error: any) => {
     console.log("Redis connection error", error);
