@@ -9,7 +9,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   userName: string;
 
   @Field()
