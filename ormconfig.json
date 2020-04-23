@@ -1,14 +1,14 @@
-{
-  "name": "default",
-  "type": "postgres",
-  "host": "ec2-34-234-228-127.compute-1.amazonaws.com",
-  "port": 5432,
-  "username": "qkkohslbgdovfa",
-  "password": "e1894399edb60499aa2f52929fc0f4c93bfc52f40606d983d92b4d134537eda2",
-  "database": "dfpurmthq35476",
-  "synchronize": true,
-  "logging": true,
-  "entities": [
-    "src/entity/*.*"
-  ]
-}
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "ec2-34-234-228-127.compute-1.amazonaws.com",
+    "port": 5432,
+    "username": "qkkohslbgdovfa",
+    "password": "e1894399edb60499aa2f52929fc0f4c93bfc52f40606d983d92b4d134537eda2",
+    "database": "dfpurmthq35476",
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+      "src/entity/*.*"
+    ]
+  }

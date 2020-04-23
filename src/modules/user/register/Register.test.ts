@@ -21,10 +21,8 @@ mutation Register($data: RegisterInput!) {
     data: $data
   ) {
     id
-    firstName
-    lastName
+    userName
     email
-    name
   }
 }
 `;
@@ -33,8 +31,7 @@ describe('Register', () => {
   it("create user", async () => {
 
     const user = {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      userName: faker.name.firstName(),
       email: faker.internet.email(),
       password: faker.internet.password()
     };
@@ -48,8 +45,7 @@ describe('Register', () => {
     expect(response).toMatchObject({
       data: {
         register: {
-          firstName: user.firstName,
-          lastName: user.lastName,
+          userName: user.userName,
           email: user.email
         }
       }
