@@ -20,7 +20,7 @@ export class User extends BaseEntity {
   password: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   profileImg: string;
 
   @Column("bool", { default: false })
