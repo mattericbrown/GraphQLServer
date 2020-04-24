@@ -22,6 +22,7 @@ export async function sendEmail(email: string, url: string) {
   const info = await transporter.sendMail(mailOptions);
 
   console.log("Message sent: %s", info.messageId);
+  console.log(mailOptions.html)
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
