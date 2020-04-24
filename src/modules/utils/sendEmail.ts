@@ -7,7 +7,7 @@ export async function sendEmail(email: string, url: string) {
     service: 'SendGrid',
     auth: {
       user: 'moosemalooks1',
-      pass: 'Matpod657!'
+      pass: 'mrmoose17'
     }
   });
 

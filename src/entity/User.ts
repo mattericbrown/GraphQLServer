@@ -23,7 +23,7 @@ export class User extends BaseEntity {
   @Column()
   profileImg: string;
 
-  @Column("bool", { default: false })
+  @Column("bool", { default: true })
   confirmed: boolean;
 
   @Field()
