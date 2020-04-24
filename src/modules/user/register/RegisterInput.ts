@@ -51,4 +51,31 @@ export class RegisterInput {
 
   @Field()
   level: number;
+
+  @Field(() => [Number])
+  html_scores: number[];
+
+  @Field(() => [Number])
+  css_scores: number[];
+
+  @Field(() => [Number])
+  js_scores: number[];
+
+  @Field(() => [Number])
+  react_scores: number[];
+
+  @Field(() => [Number])
+  vue_scores: number[];
+
+  @Field(() => [Number])
+  gql_scores: number[];
+
+  @Field(() => [Number])
+  ts_scores: number[];
+
+  @Field(() => [Number])
+  vsc_scores: number[];
+
+  @Field(() => [Number])
+  aws_scores: number[];
 }
