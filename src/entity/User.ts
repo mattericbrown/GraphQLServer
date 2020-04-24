@@ -67,73 +67,73 @@ export class User extends BaseEntity {
   level: number;
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   html_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   css_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   js_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   react_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   vue_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   gql_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   ts_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   vsc_scores: number[];
 
   @Field(() => [Number])
-  @Column("number", {
+  @Column("float4", {
     array: true,
-    default: () => "array[]::number[]",
+    default: () => "array[]::integer[]",
     nullable: false,
   })
   aws_scores: number[];
