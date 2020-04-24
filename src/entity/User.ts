@@ -9,7 +9,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Field()
-  @Column({ nullable: true })
+  @Column("text", { unique: true })
   userName: string;
 
   @Field()
@@ -20,7 +20,7 @@ export class User extends BaseEntity {
   password: string;
 
   @Field()
-  @Column({ nullable: true })
+  @Column()
   profileImg: string;
 
   @Column("bool", { default: false })
@@ -66,7 +66,6 @@ export class User extends BaseEntity {
   @Column("int", { default: 1 })
   level: number;
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -74,7 +73,6 @@ export class User extends BaseEntity {
   })
   html_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -82,7 +80,6 @@ export class User extends BaseEntity {
   })
   css_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -90,7 +87,6 @@ export class User extends BaseEntity {
   })
   js_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -98,7 +94,6 @@ export class User extends BaseEntity {
   })
   react_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -106,7 +101,6 @@ export class User extends BaseEntity {
   })
   vue_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -114,7 +108,6 @@ export class User extends BaseEntity {
   })
   gql_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -122,7 +115,6 @@ export class User extends BaseEntity {
   })
   ts_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
@@ -130,7 +122,6 @@ export class User extends BaseEntity {
   })
   vsc_scores: number[];
 
-  @Field(() => [Number], { nullable: true })
   @Column("float4", {
     array: true,
     default: () => "array[]::integer[]",
