@@ -4,7 +4,7 @@
   "host": "ec2-34-234-228-127.compute-1.amazonaws.com",
   "port": 5432,
   "username": "mzthzlbiwaeito",
-  "password": "8380f39f3cb9791e209a6282f2f0a183c7a7f7b6b500c19737290d8555ac3fe",
+  "password": "58380f39f3cb9791e209a6282f2f0a183c7a7f7b6b500c19737290d8555ac3fe",
   "database": "d8vk7mgdckp1jg",
   "synchronize": true,
   "logging": true,
