@@ -32,7 +32,7 @@ export class LoginResolver {
     }
     
     ctx.req.session!.userId = user.id;
-
+    console.log(ctx.req.session!.userId = user.id)
     return user;
   }
 }
