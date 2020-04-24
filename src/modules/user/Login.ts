@@ -15,16 +15,19 @@ export class LoginResolver {
     const user = await User.findOne({where: { email } });
 
     if (!user) {
+      console.log("not user")
       return null
     }
 
     const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
+      console.log("not valid")
       return null
     }
 
     if (!user.confirmed) {
+      console.log("not confirmed")
       return null;
     }
     
