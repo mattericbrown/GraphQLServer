@@ -42,10 +42,11 @@ const main = async () => {
 
   const RedisStore = connectRedis(session);
 
+  const newLocal = "http://www.developersquiz.com";
   app.use(
     cors({
       credentials: true,
-      origin: "http://www.developersquiz.com",
+      origin: newLocal,
     })
   );
 
