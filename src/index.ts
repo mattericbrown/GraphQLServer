@@ -1,88 +1,138 @@
-import "reflect-metadata";
-import { ApolloServer } from 'apollo-server-express';
-import Express from 'express';
-import { createConnection } from "typeorm";
-import session from 'express-session';
-import connectRedis from 'connect-redis';
-import cors from 'cors'
+import { ApolloError, ApolloServer } from "apollo-server-express";
+import connectRedis from "connect-redis";
+import cors from "cors";
+import Express from "express";
+import session from "express-session";
+import { GraphQLError } from "graphql";
+import http from "http";
+import { getConnection } from "typeorm";
+import { v4 } from "uuid";
 
-import { redis } from './redis'
-import { createSchema } from './utils/createSchema'
-  
+import { COOKIE_PREFIX } from "./common/constants";
+import { redis } from "./redis";
+import { UserLoader } from "./server/dataloader/UserLoader";
+import { REDIS_SESSION_PREFIX } from "./server/util/constants";
+import { createSchema } from "./utils/createSchema";
+import { createTypeORMConn } from "./server/util/createTypeORMConn";
+import { DisplayError } from "./server/util/server/DisplayError";
+import { logManager } from "./server/util/server/logManager";
+// import { queryComplexityPlugin } from './server/util/server/QueryComplexity';
+import { setupErrorHandling } from "./server/util/server/shutdown";
+
+// import qs from 'qs';
+
+const logger = logManager();
 const main = async () => {
-  await createConnection();
+  const NODE_ENV = process.env.NODE_ENV;
 
-  const schema = await createSchema();
+  if (NODE_ENV === "test") {
+    await redis.flushall();
+  }
 
+  try {
+    const conn = await createTypeORMConn();
+    conn.runMigrations();
+    const schema = await createSchema();
 
-
-  const apolloServer = new ApolloServer({
-    schema,
-    introspection: true,
-    playground: true,
-    context: ({req, res}: any) => ({ req, res }),
-    validationRules: [
-      // queryComplexity({
-      //   maximumComplexity: 8,
-      //   variables: {},
-      //   onComplete: (complexity: number) => {
-      //     console.log("Query Complexity:", complexity);
-      //   },
-      //   estimators: [
-      //     fieldConfigEstimator(),
-      //     simpleEstimator({
-      //       defaultComplexity: 1,
-      //     })
-      //   ]
-      //  }) as any
-      ]
-  });
-  
-  const app = Express();
-
-  const RedisStore = connectRedis(session);
-
-  const newLocal = "http://www.developersquiz.com";
-  app.use(
-    cors({
-      credentials: true,
-      origin: newLocal,
-    })
-  );
-
-  app.use(
-    session({
-      store: new RedisStore({
-        client: redis as any
-      }),
-      name: "qid",
-      secret: ["xbalfwkerf21493", "mbalfwievj94637", "kelwklwopj63427"],
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24  * 365
+    const apolloServer = new ApolloServer({
+      subscriptions: {
+        path: "/",
       },
-    })
-  );
+      schema,
+      context: ({ req, res }) => ({
+        req,
+        res,
+        session: req ? req.session : undefined,
+        redis,
+        url: req ? req.protocol + "://" + req.get("host") : "",
+        userLoader: UserLoader(),
+      }),
+      // plugins: [queryComplexityPlugin(schema)],
+      playground: {
+        endpoint: `/graphql`,
+      },
+      introspection: true,
+      formatError: (error: GraphQLError) => {
+        if (
+          error.originalError instanceof ApolloError ||
+          error.originalError instanceof DisplayError
+        ) {
+          return error;
+        }
 
-  app.set("trust proxy", 1);
+        const errId = v4();
+        console.log("errId: ", errId);
+        console.log(error);
 
-  redis.on("error", (error: any) => {
-    console.log("Redis connection error", error);
-    process.exit(1);
-  });
+        return new GraphQLError(`Internal Error: ${errId}`);
+      },
+    });
+    const app = Express();
+    const RedisStore = connectRedis(session);
+    if (NODE_ENV === "production") {
+      app.set("trust proxy", 1);
+    }
 
-  process.on("exit", function () {
-    console.log("Exiting...listener count", redis.listenerCount("error"));
-  });
+    app.use(
+      session({
+        store: new RedisStore({
+          client: redis as any,
+          prefix: REDIS_SESSION_PREFIX,
+        }),
+        name: COOKIE_PREFIX,
+        secret: "aslkdfjoiq12312",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          httpOnly: true,
+          secure: NODE_ENV === "production",
+          maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+          sameSite: true,
+          path: "/",
+        },
+        proxy: true,
+      })
+    );
 
-  apolloServer.applyMiddleware({ app, cors: false });
+    let origin: any = ["http://localhost:3000"];
+    if (NODE_ENV === "production") {
+      origin = [
+        "http://www.developersquiz.com"
+      ];
+    } else if (NODE_ENV === "test") {
+      origin = "*";
+    }
+    app.use(
+      cors({
+        credentials: true,
+        origin,
+      })
+    );
 
-  app.listen( {port: process.env.PORT || 4000 }, () => {
-    console.log("server started on http://localhost:4000/graphql");
-  })
+    apolloServer.applyMiddleware({ app, cors: false, path: "/" });
+    const httpServer = http.createServer(app);
+    apolloServer.installSubscriptionHandlers(httpServer);
+
+    const serverPort = process.env.PORT || process.env.EXPRESS_SERVER_PORT;
+    const port =
+      NODE_ENV === "test" ? process.env.TEST_SERVER_PORT : serverPort;
+
+    const nodeServer = httpServer.listen(port, () => {
+      console.log(`****** server started on ${port}`);
+      console.log(
+        `🚀 Subscriptions ready at ${port}${apolloServer.subscriptionsPath}`
+      );
+    });
+
+    setupErrorHandling({
+      db: getConnection(),
+      redisClient: redis,
+      logger: logger,
+      nodeServer: nodeServer,
+    });
+  } catch (e) {
+    console.log(" <<<<> >>>> Error ---- ", e);
+  }
 };
-  
+
 main();
