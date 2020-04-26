@@ -55,7 +55,7 @@ const main = async () => {
   app.use(
     session({
       store: new RedisStore({
-        client: redis as any
+        client: redis as any,
       }),
       name: "qid",
       secret: "xbalfwkerf21493",
@@ -64,7 +64,8 @@ const main = async () => {
       cookie: {
         httpOnly: true,
         secure: false,
-        maxAge: 1000 * 60 * 60 * 24  * 365
+        domain: ".developersquiz.com",
+        maxAge: 1000 * 60 * 60 * 24 * 365,
       },
     })
   );
