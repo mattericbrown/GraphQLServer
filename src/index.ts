@@ -40,6 +40,8 @@ const main = async () => {
   
   const app = Express();
 
+  app.set("trust proxy", 1);
+
   const RedisStore = connectRedis(session);
 
   const newLocal = "http://www.developersquiz.com";
@@ -56,7 +58,7 @@ const main = async () => {
         client: redis as any
       }),
       name: "qid",
-      secret: ["xbalfwkerf21493", "mbalfwievj94637", "kelwklwopj63427"],
+      secret: "xbalfwkerf21493",
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -67,7 +69,7 @@ const main = async () => {
     })
   );
 
-  app.set("trust proxy", 1);
+  
 
   redis.on("error", (error: any) => {
     console.log("Redis connection error", error);
