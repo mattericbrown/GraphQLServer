@@ -44,7 +44,7 @@ const main = async () => {
 
   const RedisStore = connectRedis(session);
 
-  const newLocal = "http://www.developersquiz.com";
+  const newLocal = "http://localhost:3000";
   app.use(
     cors({
       credentials: true,
@@ -64,7 +64,6 @@ const main = async () => {
       cookie: {
         httpOnly: true,
         secure: false,
-        domain: ".developersquiz.com",
         maxAge: 1000 * 60 * 60 * 24 * 365,
       },
     })
