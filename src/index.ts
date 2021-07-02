@@ -85,7 +85,7 @@ const main = async () => {
 
   app.listen( {port: process.env.PORT || 4000 }, () => {
     console.log("server started on http://localhost:4000/graphql");
-  })
+  });
 };
   
 main();
