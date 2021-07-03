@@ -42,7 +42,7 @@ const main = async () => {
   
   const app = Express();
 
-  app.set("trust proxy", 1);
+  app.set("trust proxy", '0.0.0.0');
 
   const RedisStore = connectRedis(session);
 
