@@ -10,6 +10,8 @@ import { redis } from './redis'
 import { createSchema } from './utils/createSchema'
   
 const main = async () => {
+
+  console.log('starting')
   await createConnection();
 
   const schema = await createSchema();

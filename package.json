@@ -47,7 +47,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/index.ts",
+    "start": "ts-node src/index.ts",
     "db:setup": "ts-node ./src/test-utils/setup.ts",
     "test": "npm run db:setup && jest"
   }
