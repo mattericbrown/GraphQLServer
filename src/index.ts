@@ -83,9 +83,9 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app, cors: false });
 
-  app.listen(process.env.PORT, () => {
-    console.log("server started on http://localhost:4000/graphql");
-  });
+  const PORT = process.env.PORT || 3000;
+
+  app.listen(PORT);
 };
   
 main();
