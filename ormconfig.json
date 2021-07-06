@@ -1,15 +1,9 @@
+
 {
   "name": "default",
   "type": "postgres",
-  "host": "ec2-34-234-228-127.compute-1.amazonaws.com",
-  "port": 5432,
-  "username": "mzthzlbiwaeito",
-  "password": "58380f39f3cb9791e209a6282f2f0a183c7a7f7b6b500c19737290d8555ac3fe",
-  "database": "d8vk7mgdckp1jg",
-  "synchronize": true,
+  "url": "postgres://mzthzlbiwaeito:58380f39f3cb9791e209a6282f2f0a183c7a7f7b6b500c19737290d8555ac3fe@ec2-34-234-228-127.compute-1.amazonaws.com:5432/d8vk7mgdckp1jg",
+  "synchronize": false,
   "logging": true,
-  "entities": [
-    "src/entity/*.*"
-  ],
-  "url" : "postgres://mzthzlbiwaeito:58380f39f3cb9791e209a6282f2f0a183c7a7f7b6b500c19737290d8555ac3fe@ec2-34-234-228-127.compute-1.amazonaws.com:5432/d8vk7mgdckp1jg"
+  "entities": ["src/entity/*.*"]
 }
