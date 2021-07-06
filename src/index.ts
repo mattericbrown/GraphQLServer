@@ -10,8 +10,6 @@ import { redis } from './redis'
 import { createSchema } from './utils/createSchema'
   
 const main = async () => {
-
-  console.log('starting')
   await createConnection();
 
   const schema = await createSchema();
@@ -42,7 +40,7 @@ const main = async () => {
   
   const app = Express();
 
-  app.set("trust proxy", '0.0.0.0');
+  app.set("trust proxy", 1);
 
   const RedisStore = connectRedis(session);
 
@@ -85,9 +83,9 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app, cors: false });
 
-  const PORT = process.env.PORT || '0.0.0.0';
-
-  app.listen(PORT);
+  app.listen( {port: process.env.PORT || 4000}, () => {
+    console.log("server started on http://localhost:4000/graphql");
+  });
 };
   
 main();
